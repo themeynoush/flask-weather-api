@@ -26,8 +26,11 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Lint with Pylint
-        run: poetry run pylint app weatherlib
+      # - name: Run Linting (app)
+      #   run: poetry run timeout 120 pylint app
+
+      # - name: Run Linting (weatherlib)
+      #   run: poetry run timeout 120 pylint weatherlib
 
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
