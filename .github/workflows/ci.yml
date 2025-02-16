@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Lint with Pylint
+        run: poetry run pylint app weatherlib
+
+      - name: Run unit tests
+        run: poetry run python -m unittest discover -v
+
+      - name: Build documentation
+        run: |
+          poetry run mkdocs build  # Example: build docs into site/ directory
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main' && success()  # Only deploy on main branch if all prior steps succeeded
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site  # directory of built documentation
