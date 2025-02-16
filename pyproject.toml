@@ -1,16 +1,19 @@
 [tool.poetry]
 name = "flask-weather-api"
 version = "0.1.0"
-description = ""
+description = "A Flask-based Weather API"
 authors = ["Meynoush Kohandani"]
 license = "MIT"
 readme = "README.md"
+packages = [{ include = "app" }, { include = "weatherlib" }]
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
 flask = "^3.1.0"
 requests = "^2.32.3"
 python-dotenv = "^1.0.1"
+gunicorn = "^23.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
