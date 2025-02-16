@@ -33,7 +33,8 @@ flask-weather-api/
 │   └── index.md             # Main documentation page
 ├── .github/
 │   └── workflows/
-│       └── ci.yml           # GitHub Actions CI/CD pipeline
+│       └── ci.yml           # GitHub Actions CI pipeline
+│       └── pages.yml        # GitHub Actions CD pipeline
 ├── mkdocs.yml               # Configuration file for MkDocs site generation
 ├── pyproject.toml           # Poetry dependencies & project metadata
 ├── README.md                # Documentation
