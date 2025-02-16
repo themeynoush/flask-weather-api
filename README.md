@@ -99,10 +99,10 @@ curl "http://127.0.0.1:5000/weather/current?city=Paris"
 Example Response
 
 {
-  "location": "Paris",
-  "temperature_c": 20.5,
-  "temperature_f": 68.9,
-  "condition": "Partly cloudy"
+  "condition":"Sunny",
+  "location":"Paris",
+  "temperature_c":5.3,
+  "temperature_f":41.54
 }
 
 Error Responses
