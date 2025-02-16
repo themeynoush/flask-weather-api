@@ -9,7 +9,7 @@ packages = [{ include = "app" }, { include = "weatherlib" }]
 
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 flask = "^3.1.0"
 requests = "^2.32.3"
 python-dotenv = "^1.0.1"
