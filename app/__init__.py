@@ -5,7 +5,6 @@ from flask import Flask
 from app.weather_routes import weather_bp
 
 
-
 def create_app(test_config=None):
     """
     Flask application factory. Creates and configures the Flask app.
