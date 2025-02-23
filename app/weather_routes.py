@@ -20,7 +20,7 @@ def get_current_weather():
     # Use the weather provider to get data
     try:
         data = provider.get_current_weather(city)
-    except Exception as e:
+    except ValueError as e:
         current_app.logger.exception("Weather data fetch failed")
         return (
             jsonify({"error": "Failed to fetch weather data", "details": str(e)}),
