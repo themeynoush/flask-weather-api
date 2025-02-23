@@ -26,11 +26,17 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
+      - name: Install Black
+        run: poetry add black --dev
+
+      - name: Run Black Code Formatter
+        run: poetry run black --check --diff app weatherlib tests
+
       - name: Run Linting (weatherlib)
-        run: poetry run pylint weatherlib
-        
+        run: poetry run pylint weatherlib --output-format=colorized
+
       - name: Run Linting (app)
-        run: poetry run pylint app
+        run: poetry run pylint app --output-format=colorized
 
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
