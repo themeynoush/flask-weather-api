@@ -1,4 +1,5 @@
-""" Application factory and initialization for the Flask app. """
+"""Application factory and initialization for the Flask app."""
+
 import os
 from flask import Flask
 

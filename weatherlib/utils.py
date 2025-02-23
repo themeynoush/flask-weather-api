@@ -1,4 +1,4 @@
-""" Utility functions for weather data processing."""
+"""Utility functions for weather data processing."""
 
 
 def celsius_to_fahrenheit(celsius: float) -> float:

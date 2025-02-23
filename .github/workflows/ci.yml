@@ -24,13 +24,13 @@ jobs:
           pip install poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-root --no-cache
 
       - name: Install Black
-        run: poetry add black --dev
+        run: poetry add black@25.1.0 --dev
 
       - name: Run Black Code Formatter
-        run: poetry run black --check --diff app weatherlib tests
+        run: poetry run black --check --diff app weatherlib tests || (echo "Black formatting needed!" && exit 1)
 
       - name: Run Linting (weatherlib)
         run: poetry run pylint weatherlib --output-format=colorized

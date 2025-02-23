@@ -1,4 +1,4 @@
-""" Define a Blueprint for weather-related routes."""
+"""Define a Blueprint for weather-related routes."""
 
 from flask import Blueprint, request, jsonify, current_app
 from weatherlib import provider, utils

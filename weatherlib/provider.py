@@ -1,4 +1,4 @@
-""" Module for fetching weather data from external APIs."""
+"""Module for fetching weather data from external APIs."""
 
 import os
 import requests
