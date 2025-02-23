@@ -1,6 +1,6 @@
 
 import unittest
-from weatherlib import utils
+import weatherlib.utils as wu
 
 # Simulate a sample response from the Weather API.
 sample_api_response = {
@@ -13,7 +13,7 @@ sample_api_response = {
 
 class TestWeatherProcessing(unittest.TestCase):
     def test_process_weather_data(self):
-        result = utils.process_weather_data(sample_api_response)
+        result = wu.process_weather_data(sample_api_response)
         # Check that required keys are present
         self.assertIn("location", result)
         self.assertIn("temperature_c", result)
@@ -27,5 +27,5 @@ class TestWeatherProcessing(unittest.TestCase):
     
     def test_process_weather_data_empty(self):
         # If data is empty or None, should return empty dict without error
-        self.assertEqual(utils.process_weather_data(None), {})
-        self.assertEqual(utils.process_weather_data({}), {})
+        self.assertEqual(wu.process_weather_data(None), {})
+        self.assertEqual(wu.process_weather_data({}), {})
