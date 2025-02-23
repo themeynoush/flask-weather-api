@@ -2,16 +2,8 @@
 
 ## Overview
 
-This is a simple **Flask-based Weather API** that fetches real-time weather data from a free weather API and exposes it via a RESTful endpoint. The project follows **SOLID principles** making it modular, maintainable, and scalable.
+This is a simple **Flask-based Weather API** that fetches real-time weather data from a free weather API and exposes it via a RESTful endpoint. Fetch real-time weather using WeatherAPI Free Tier.
 
-## Features
-
-- Fetch real-time weather using a free external API (**WeatherAPI Free Tier**).
-- **SOLID architecture**: Uses blueprints, services, and utility modules for clean separation of concerns.
-- **Custom library (`weatherlib`)**: Handles weather data processing, making it reusable.
-- **Dependency management**: Utilizes Poetry for clean installation and packaging.
-- **CI/CD pipeline**: Uses GitHub Actions for automated testing, linting, and deployment.
-- **GitHub Pages deployment**: Demonstrates continuous deployment by publishing documentation.
 
 ## Project Structure
 
@@ -33,11 +25,14 @@ flask-weather-api/
 │   └── index.md             # Main documentation page
 ├── .github/
 │   └── workflows/
-│       └── ci.yml           # GitHub Actions CI/CD pipeline
+│       └── ci.yml           # GitHub Actions CI pipeline
+│       └── pages.yml        # GitHub Actions CD pipeline
 ├── mkdocs.yml               # Configuration file for MkDocs site generation
 ├── pyproject.toml           # Poetry dependencies & project metadata
 ├── README.md                # Documentation
-└── .gitignore               # Ignore unnecessary files
+├── .gitignore               # Ignore unnecessary files
+└── .pylintrc                # Manage pylint behaviour
+
 
 
 
