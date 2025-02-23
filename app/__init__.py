@@ -1,4 +1,4 @@
-# app/__init__.py
+""" Application factory and initialization for the Flask app. """
 import os
 from flask import Flask
 
