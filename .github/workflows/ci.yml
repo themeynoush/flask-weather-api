@@ -41,9 +41,9 @@ jobs:
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
 
-      - name: Build documentation
-        run: |
-          poetry run mkdocs build  # Example: build docs into site/ directory
+      # - name: Build documentation
+      #   run: |
+      #     poetry run mkdocs build  # Example: build docs into site/ directory
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main' && success()  # Only deploy on main branch if all prior steps succeeded
