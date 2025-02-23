@@ -1,8 +1,8 @@
-# app/weather_routes.py
+""" Define a Blueprint for weather-related routes."""
+
 from flask import Blueprint, request, jsonify, current_app
 from weatherlib import provider, utils
 
-# Define a Blueprint for weather-related routes
 weather_bp = Blueprint("weather", __name__, url_prefix="/weather")
 
 

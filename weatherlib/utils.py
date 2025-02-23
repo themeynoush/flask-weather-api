@@ -1,3 +1,5 @@
+""" Utility functions for weather data processing."""
+
 def celsius_to_fahrenheit(celsius: float) -> float:
     """Convert Celsius temperature to Fahrenheit."""
     return (celsius * 9 / 5) + 32
