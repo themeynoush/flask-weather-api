@@ -1,4 +1,4 @@
-""" Configuration file using environment variables. """
+"""Configuration file using environment variables."""
 
 import os
 from dotenv import load_dotenv
