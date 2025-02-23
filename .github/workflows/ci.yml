@@ -24,13 +24,19 @@ jobs:
           pip install poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-root --no-cache
 
-      # - name: Run Linting (app)
-      #   run: poetry run timeout 120 pylint app
+      - name: Install Black
+        run: poetry add black@25.1.0 --dev
 
-      # - name: Run Linting (weatherlib)
-      #   run: poetry run timeout 120 pylint weatherlib
+      - name: Run Black Code Formatter
+        run: poetry run black --check --diff app weatherlib tests || (echo "Black formatting needed!" && exit 1)
+
+      - name: Run Linting (weatherlib)
+        run: poetry run pylint weatherlib --output-format=colorized
+
+      - name: Run Linting (app)
+        run: poetry run pylint app --output-format=colorized
 
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
