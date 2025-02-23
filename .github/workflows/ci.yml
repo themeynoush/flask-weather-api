@@ -26,11 +26,11 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Run Linting (app)
-        run: poetry run pylint app
-
       - name: Run Linting (weatherlib)
         run: poetry run pylint weatherlib
+        
+      - name: Run Linting (app)
+        run: poetry run pylint app
 
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
