@@ -25,10 +25,10 @@ class Config:
     WEATHER_API_URL = os.environ.get(
         "WEATHER_API_URL", "http://api.weatherapi.com/v1/current.json"
     )
-    
-    #TODO:
+
+    # TODO:
     # Other configs like database URL could be here as needed
-    
+
     @staticmethod
     def dummy_method():
         """Pylint workaround for too-few-public-methods."""
