@@ -4,16 +4,19 @@ from app.config import DATABASE_URL
 
 Base = declarative_base()
 
+
 class WeatherData(Base):
-    __tablename__ = 'weather'
+    __tablename__ = "weather"
     id = Column(Integer, primary_key=True, autoincrement=True)
     city = Column(String, nullable=False)
     temperature_c = Column(Float)
     temperature_f = Column(Float)
     condition = Column(String)
 
+
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
+
 
 def init_db():
     """Create tables if they don't exist."""
