@@ -439,7 +439,8 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         use-implicit-booleaness-not-comparison-to-string,
         use-implicit-booleaness-not-comparison-to-zero,
-        W0511,W0107,R0903 #Todo, Unnecessary pass statement, Too few public methods
+        W0511,W0107,R0903, #Todo, Unnecessary pass statement, Too few public methods
+        C0114, C0115, W0718, # Missing module docstring, Missing class docstring, General exception
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
