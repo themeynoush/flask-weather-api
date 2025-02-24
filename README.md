@@ -144,6 +144,14 @@ Although Flask is a backend framework, this project deploys **documentation** to
 - **CI/CD automatically deploys docs** when changes are pushed to the `main` branch.
 - The deployed site can be accessed via `https://yourusername.github.io/flask-weather-api/` (after enabling GitHub Pages in repo settings).
 
+
+## Add a favorite city to Favorite Table
+Run the following cURL command:
+```sh
+curl -X POST http://127.0.0.1:5000/weather/favorite \
+     -H "Content-Type: application/json" \
+     -d '{"user_id": 1, "city": "Paris"}'
+```
 ## Future Enhancements
 
 - Add support for **multiple weather providers** (e.g., Open-Meteo, WeatherAPI, etc.).
