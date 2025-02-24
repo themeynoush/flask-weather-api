@@ -49,6 +49,9 @@ jobs:
 
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
+        
+      - name: Run Tests
+        run: poetry run pytest --disable-warnings
 
       - name: Build documentation
         run: |
