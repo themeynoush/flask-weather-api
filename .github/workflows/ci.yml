@@ -38,6 +38,15 @@ jobs:
       - name: Run Linting (app)
         run: poetry run pylint app --output-format=colorized
 
+      - name: Set Environment Variables
+        run: echo "DATABASE_URL=sqlite:///weather.db" >> $GITHUB_ENV
+
+      - name: Reset SQLite Database
+        run: rm -f weather.db # Remove SQLite database file if it exists
+        
+      - name: Initialize Database
+        run: poetry run python -c "from app.models import init_db; init_db()"
+
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
 
