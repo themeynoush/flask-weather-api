@@ -2,7 +2,8 @@
 
 from flask import Blueprint, request, jsonify, current_app
 from weatherlib import provider, utils
-from app.models import SessionLocal, WeatherData
+from app.models import SessionLocal, WeatherData, WeatherRequestLog
+
 
 weather_bp = Blueprint("weather", __name__, url_prefix="/weather")
 
