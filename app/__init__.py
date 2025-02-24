@@ -3,10 +3,11 @@
 import os
 import logging
 from flask import Flask
+from sqlalchemy.exc import DatabaseError
 from app.weather_routes import weather_bp
 from app.models import init_db
 from app.config import Config
-from sqlalchemy.exc import DatabaseError
+
 
 logging.basicConfig(lever=logging.ERROR)
 logger = logging.getLogger(__name__)
@@ -31,7 +32,9 @@ def create_app(test_config=None):
         except DatabaseError as e:
             if "sqlite" in Config.DATABASE_URL:
                 logger.error(
-                    f"Database corruption detected: {e}. Recreating SQLite database."
+                    "Database corruption detected: %s. \
+                    Recreating SQLite database.",
+                    e,
                 )
                 os.remove("weather.db")
                 init_db()

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from app.config import DATABASE_URL
+from app.config import Config
+
 
 Base = declarative_base()
 
@@ -14,7 +15,7 @@ class WeatherData(Base):
     condition = Column(String)
 
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(Config.DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
 
