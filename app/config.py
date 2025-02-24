@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
 API_KEY = os.getenv("WEATHER_API_KEY")
-
+DATABASE_URL = os.getenv("DATABASE_URL") 
 
 class Config:
     """

@@ -38,6 +38,9 @@ jobs:
       - name: Run Linting (app)
         run: poetry run pylint app --output-format=colorized
 
+      - name: Initialize Database
+        run: poetry run python -c "from app.models import init_db; init_db()"
+
       - name: Run unit tests
         run: poetry run python -m unittest discover -v
 

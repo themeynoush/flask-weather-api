@@ -2,9 +2,9 @@
 
 from flask import Blueprint, request, jsonify, current_app
 from weatherlib import provider, utils
+from app.models import SessionLocal, WeatherData 
 
 weather_bp = Blueprint("weather", __name__, url_prefix="/weather")
-
 
 @weather_bp.route("/current", methods=["GET"])
 def get_current_weather():
@@ -29,5 +29,25 @@ def get_current_weather():
 
     # Post-process the data
     processed = utils.process_weather_data(data)
+
+        # Store the weather data in the database
+    session = SessionLocal()
+
+    try:
+        weather_entry = WeatherData(
+            city=processed["location"],
+            temperature_c=processed["temperature_c"],
+            temperature_f=processed["temperature_f"],
+            condition=processed["condition"]
+        )
+        session.add(weather_entry)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        current_app.logger.exception("Database insertion failed")
+        return jsonify({"error": "Failed to store weather data", "details": str(e)}), 500
+    finally:
+        session.close()
+
 
     return jsonify(processed)
