@@ -23,6 +23,13 @@ class WeatherRequestLog(Base):
     timestamp = Column(String, default=datetime.utcnow)
 
 
+class UserFavorites(Base):
+    __tablename__ = "user_favorites"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, nullable=False)
+    city = Column(String, nullable=False)
+
+
 engine = create_engine(Config.DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 

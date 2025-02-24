@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request, jsonify, current_app
 from weatherlib import provider, utils
-from app.models import SessionLocal, WeatherData, WeatherRequestLog
+from app.models import SessionLocal, WeatherData, WeatherRequestLog, UserFavorites
 
 
 weather_bp = Blueprint("weather", __name__, url_prefix="/weather")
@@ -76,3 +76,21 @@ def get_current_weather():
         session.close()
 
     return jsonify(processed)
+
+
+@weather_bp.route("/favorite", methods=["POST"])
+def add_favorite():
+    data = request
+    user_id = data.get("user_id")
+    city = data.get("city")
+
+    if not user_id or not city:
+        return jsonify({"error": "Missing user_id or city"}), 400
+
+    session = SessionLocal()
+    favorite = UserFavorites(user_id=user_id, city=city)
+    session.add(favorite)
+    session.commit()
+    session.close()
+
+    return jsonify({"message": "Favority City Added!"})
