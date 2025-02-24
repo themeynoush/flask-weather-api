@@ -11,6 +11,7 @@ from sqlalchemy.exc import DatabaseError
 logging.basicConfig(lever=logging.ERROR)
 logger = logging.getLogger(__name__)
 
+
 def create_app(test_config=None):
     """
     Flask application factory. Creates and configures the Flask app.
@@ -29,12 +30,14 @@ def create_app(test_config=None):
             init_db()
         except DatabaseError as e:
             if "sqlite" in Config.DATABASE_URL:
-                logger.error(f"Database corruption detected: {e}. Recreating SQLite database.")
+                logger.error(
+                    f"Database corruption detected: {e}. Recreating SQLite database."
+                )
                 os.remove("weather.db")
                 init_db()
             else:
                 raise
-            
+
     app.register_blueprint(weather_bp)
 
     return app
