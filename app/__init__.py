@@ -9,7 +9,7 @@ from app.models import init_db
 from app.config import Config
 
 
-logging.basicConfig(lever=logging.ERROR)
+logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 
