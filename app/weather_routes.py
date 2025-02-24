@@ -78,9 +78,44 @@ def get_current_weather():
     return jsonify(processed)
 
 
+@weather_bp.route("/favorites/<int:user_id>", methods=["GET"])
+def get_favorites(user_id):
+    """
+    GET /weather/favorites/<user_id>
+    Returns a list of favorite cities for a user.
+    """
+    session = SessionLocal()
+    try:
+        favorites = (
+            session.query(UserFavorites).filter(UserFavorites.user_id == user_id).all()
+        )
+
+        if not favorites:
+            return jsonify({"message": "The user's favorite list is empty."}), 200
+
+        return jsonify({"favorites": [fav.city for fav in favorites]})
+    except Exception as e:
+        current_app.logger.exception("Failed to retrieve favorites")
+        return (
+            jsonify({"error": "Failed to fetch favorite cities", "details": str(e)}),
+            500,
+        )
+    finally:
+        session.close()
+
+
 @weather_bp.route("/favorite", methods=["POST"])
 def add_favorite():
-    data = request
+    """
+    POST /weather/favorite
+    Stores a user's favorite city.
+    Expects JSON with `user_id` and `city`.
+    """
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Invalid JSON data"}), 400
+
     user_id = data.get("user_id")
     city = data.get("city")
 
@@ -88,9 +123,18 @@ def add_favorite():
         return jsonify({"error": "Missing user_id or city"}), 400
 
     session = SessionLocal()
-    favorite = UserFavorites(user_id=user_id, city=city)
-    session.add(favorite)
-    session.commit()
-    session.close()
+    try:
+        favorite = UserFavorites(user_id=user_id, city=city)
+        session.add(favorite)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        current_app.logger.exception("Failed to add favorite city")
+        return (
+            jsonify({"error": "Failed to store favorite city", "details": str(e)}),
+            500,
+        )
+    finally:
+        session.close()
 
-    return jsonify({"message": "Favority City Added!"})
+    return jsonify({"message": "Favorite city added!"})
