@@ -14,6 +14,7 @@ class WeatherData(Base):
     temperature_f = Column(Float)
     condition = Column(String)
 
+
 class WeatherRequestLog(Base):
     __tablename__ = "weather_requests"
     id = Column(Integer, primary_key=True, autoincrement=True)

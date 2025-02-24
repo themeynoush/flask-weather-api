@@ -17,21 +17,22 @@ def get_current_weather():
     city = request.args.get("city")
     if not city:
         return jsonify({"error": "Missing required 'city' parameter"}), 400
-    
+
     session = SessionLocal()
-    
+
     # Check for cached weather data
     cached_weather = session.query(WeatherData).filter(WeatherData.city == city).first()
     if cached_weather:
         session.close()
-        return jsonify({
-            "location": cached_weather.city,
-            "temperature_c": cached_weather.temperature_c,
-            "temperature_f": cached_weather.temperature_f,
-            "condition": cached_weather.condition,
-            "cached": True
-        })
-
+        return jsonify(
+            {
+                "location": cached_weather.city,
+                "temperature_c": cached_weather.temperature_c,
+                "temperature_f": cached_weather.temperature_f,
+                "condition": cached_weather.condition,
+                "cached": True,
+            }
+        )
 
     # Fetch new weather data
     try:
@@ -57,11 +58,11 @@ def get_current_weather():
             condition=processed["condition"],
         )
         session.add(weather_entry)
-        
+
         # Log the request
         log_entry = WeatherRequestLog(city=city)
         session.add(log_entry)
-        
+
         session.commit()
     except Exception as e:
         session.rollback()
