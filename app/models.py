@@ -14,6 +14,12 @@ class WeatherData(Base):
     temperature_f = Column(Float)
     condition = Column(String)
 
+class WeatherRequestLog(Base):
+    __tablename__ = "weather_requests"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    city = Column(String, nullable=False)
+    timestamp = Column(String, default=datetime.utcnow)
+
 
 engine = create_engine(Config.DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
